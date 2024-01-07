@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN apk add curl
+
 RUN mkdir -p /opt/haraka
 RUN curl -sL https://github.com/haraka/Haraka/archive/refs/tags/${PATCH}.tar.gz -o /opt/haraka.tar.gz
 RUN tar xzvf /opt/haraka.tar.gz -C /opt/haraka --strip-components 1

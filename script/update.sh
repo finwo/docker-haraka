@@ -4,6 +4,7 @@ set -ex
 
 BASE=$(realpath $(dirname $0)/..)
 BUILDDIR=${BASE}/build
+IMAGE=finwo/haraka
 
 function install_versioned {
   export PATCH=$1
@@ -61,6 +62,14 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
     mkdir -p ${BUILDDIR}
     install_versioned ${tag} Dockerfile
     install_versioned ${tag} haraka.sh
+
+    (
+      cd ${BUILDDIR}
+      docker build -t ${IMAGE}:${MAJOR} -t ${IMAGE}:${MINOR} -t ${IMAGE}:${PATCH} .
+      docker push ${IMAGE}:${MAJOR}
+      docker push ${IMAGE}:${MINOR}
+      docker push ${IMAGE}:${PATCH}
+    )
 
     tree ${BUILDDIR}
 

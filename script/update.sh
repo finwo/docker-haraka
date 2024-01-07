@@ -59,9 +59,13 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
 
     # Reset build dir
     rm -rf ${BUILDDIR}
-    mkdir -p ${BUILDDIR}
+    mkdir -p ${BUILDDIR}/config
     install_versioned ${tag} Dockerfile
     install_versioned ${tag} entrypoint.sh
+
+    # Fetch deps for the dockerfile
+    curl -sL https://raw.githubusercontent.com/haraka/Haraka/${tag}/config/plugins   > ${BUILDDIR}/config/plugins
+    curl -sL https://raw.githubusercontent.com/haraka/Haraka/${tag}/config/host_list > ${BUILDDIR}/config/host_list
 
     (
       cd ${BUILDDIR}

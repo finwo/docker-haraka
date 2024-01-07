@@ -8,7 +8,7 @@ IMAGE=finwo/haraka
 
 function install_versioned {
   export PATCH=$1
-  export MINOR=${TAG%.*}
+  export MINOR=${PATCH%.*}
   export MAJOR=${MINOR%.*}
   FILENAME=$2
   mkdir -p $(dirname "${BUILDDIR}/${FILENAME}")

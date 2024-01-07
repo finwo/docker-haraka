@@ -1,10 +1,8 @@
 FROM node:alpine
 
-# Install Haraka
-RUN npm install -g Haraka@${PATCH} --unsafe
-RUN haraka -i /opt/haraka
-ADD ./config/host_list /opt/haraka/config/host_list
-ADD ./config/plugins   /opt/haraka/config/plugins
+RUN mkdir -p /opt/haraka
+RUN curl -sL https://github.com/haraka/Haraka/archive/refs/tags/${PATCH}.tar.gz -o /opt/haraka.tar.gz
+RUN tar xzvf /opt/haraka.tar.gz -C /opt/haraka --strip-components 1
 RUN cd /opt/haraka && npm install
 
 ADD entrypoint.sh /opt/haraka/entrypoint.sh

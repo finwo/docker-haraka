@@ -53,11 +53,8 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
       # continue
     fi
 
-    # # Destructure tag into major/minor/patch
-    # minortag=${tag%.*}
-    # majortag=${minortag%.*}
-
     # Reset build dir
+    # Side-effect: defined MAJOR,MINOR,PATCH
     rm -rf ${BUILDDIR}
     mkdir -p ${BUILDDIR}/config
     install_versioned ${tag} Dockerfile

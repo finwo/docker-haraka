@@ -1,6 +1,6 @@
 FROM node:alpine
 
-RUN apk add bash \
+RUN apk add \
   build-base\
   curl \
   python3
@@ -14,4 +14,4 @@ ADD entrypoint.sh /opt/haraka/entrypoint.sh
 
 EXPOSE 25
 
-CMD ["/opt/haraka/entrypoint.sh"]
+ENTRYPOINT ["/opt/haraka/entrypoint.sh"]

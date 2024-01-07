@@ -52,6 +52,7 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
       echo "tag $tag is stale, skipping"
       # continue
     fi
+    echo "Processing $tag"
 
     # Reset build dir
     # Side-effect: defined MAJOR,MINOR,PATCH
@@ -64,16 +65,14 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
     curl -sL https://raw.githubusercontent.com/haraka/Haraka/${tag}/config/plugins   > ${BUILDDIR}/config/plugins
     curl -sL https://raw.githubusercontent.com/haraka/Haraka/${tag}/config/host_list > ${BUILDDIR}/config/host_list
 
-    (
-      cd ${BUILDDIR}
-      docker build -t ${IMAGE}:${MAJOR} -t ${IMAGE}:${MINOR} -t ${IMAGE}:${PATCH} -t ${IMAGE}:latest .
-      docker push ${IMAGE}:${PATCH}
-      docker push ${IMAGE}:${MINOR}
-      docker push ${IMAGE}:${MAJOR}
-      docker push ${IMAGE}:latest
-    )
+    cd ${BUILDDIR}
+    docker build -t ${IMAGE}:${MAJOR} -t ${IMAGE}:${MINOR} -t ${IMAGE}:${PATCH} -t ${IMAGE}:latest . || continue
+    docker push ${IMAGE}:${PATCH} || continue
+    docker push ${IMAGE}:${MINOR} || continue
+    docker push ${IMAGE}:${MAJOR} || continue
+    docker push ${IMAGE}:latest || continue
+    cd ${BASE}
 
     cat ${BUILDDIR}/Dockerfile
 
-    echo "Processing $tag"
   done

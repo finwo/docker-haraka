@@ -18,7 +18,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y -q install nodejs && \
 #RUN /usr/sbin/enable_insecure_key
 
 # Install Haraka
-RUN npm install -g Haraka --unsafe
+RUN npm install -g Haraka@${PATCH} --unsafe
 RUN haraka -i /usr/local/haraka
 ADD ./config/host_list /usr/local/haraka/config/host_list
 ADD ./config/plugins /usr/local/haraka/config/plugins

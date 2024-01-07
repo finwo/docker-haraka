@@ -69,10 +69,11 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
 
     (
       cd ${BUILDDIR}
-      docker build -t ${IMAGE}:${MAJOR} -t ${IMAGE}:${MINOR} -t ${IMAGE}:${PATCH} .
-      docker push ${IMAGE}:${MAJOR}
-      docker push ${IMAGE}:${MINOR}
+      docker build -t ${IMAGE}:${MAJOR} -t ${IMAGE}:${MINOR} -t ${IMAGE}:${PATCH} -t ${IMAGE}:latest .
       docker push ${IMAGE}:${PATCH}
+      docker push ${IMAGE}:${MINOR}
+      docker push ${IMAGE}:${MAJOR}
+      docker push ${IMAGE}:latest
     )
 
     cat ${BUILDDIR}/Dockerfile

@@ -61,7 +61,7 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
     rm -rf ${BUILDDIR}
     mkdir -p ${BUILDDIR}
     install_versioned ${tag} Dockerfile
-    install_versioned ${tag} haraka.sh
+    install_versioned ${tag} entrypoint.sh
 
     (
       cd ${BUILDDIR}
@@ -70,8 +70,6 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
       docker push ${IMAGE}:${MINOR}
       docker push ${IMAGE}:${PATCH}
     )
-
-    tree ${BUILDDIR}
 
     cat ${BUILDDIR}/Dockerfile
 

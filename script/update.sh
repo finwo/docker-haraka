@@ -4,9 +4,9 @@ BASE=$(realpath $(dirname $0)/..)
 BUILDDIR=${BASE}/build
 
 function install_versioned {
-  PATCH=$1
-  MINOR=${TAG%.*}
-  MAJOR=${MINOR%.*}
+  export PATCH=$1
+  export MINOR=${TAG%.*}
+  export MAJOR=${MINOR%.*}
   FILENAME=$2
   mkdir -p $(dirname "${BUILDDIR}/${FILENAME}")
 

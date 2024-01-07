@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -ex
+
 BASE=$(realpath $(dirname $0)/..)
 BUILDDIR=${BASE}/build
 

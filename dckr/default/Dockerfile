@@ -1,6 +1,8 @@
 FROM node:alpine
 
-RUN apk add curl
+RUN apk add curl \
+  build-base\
+  python
 
 RUN mkdir -p /opt/haraka
 RUN curl -sL https://github.com/haraka/Haraka/archive/refs/tags/${PATCH}.tar.gz -o /opt/haraka.tar.gz

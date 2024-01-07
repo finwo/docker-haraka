@@ -45,6 +45,7 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
   jq -r '.[]|[.name, .commit.url] | @tsv' | \
   sort | \
   while IFS=$'\t' read -r tag tagurl; do
+    cd ${BASE}
 
     # Skip tag if it's older than 36 hours
     # Will push a tag twice, should fix later
@@ -71,8 +72,4 @@ curl -sL https://api.github.com/repos/haraka/haraka/tags | \
     docker push ${IMAGE}:${MINOR} || continue
     docker push ${IMAGE}:${MAJOR} || continue
     docker push ${IMAGE}:latest || continue
-    cd ${BASE}
-
-    cat ${BUILDDIR}/Dockerfile
-
   done

@@ -1,7 +1,8 @@
 FROM node:alpine
 
-RUN apk add curl \
+RUN apk add bash \
   build-base\
+  curl \
   python3
 
 RUN mkdir -p /opt/haraka

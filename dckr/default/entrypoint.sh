@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 if [ ! -z "$HOSTS" ]; then
   echo "$HOSTS" | tr ',' '\n' > /usr/local/haraka/config/host_list

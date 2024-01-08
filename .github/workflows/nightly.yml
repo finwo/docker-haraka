@@ -2,12 +2,12 @@
 
 name: nightly
 
-# on:
-#   schedule:
-#     - cron: '0 4 * * *'
-#   workflow_dispatch:
+on:
+  schedule:
+    - cron: '0 4 * * *'
+  workflow_dispatch:
 
-on: push
+# on: push
 
 jobs:
   nightly:
